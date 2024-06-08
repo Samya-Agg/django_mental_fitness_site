@@ -78,7 +78,7 @@ def chatting(request):
             recipient=recipient,
             message=request.POST.get('body')
         )
-        return redirect('chatting')  # Replace with the appropriate URL name
+        return redirect('chatting')  
 
     if 'recipient' in request.GET:
         recipient_username = request.GET.get('recipient')
