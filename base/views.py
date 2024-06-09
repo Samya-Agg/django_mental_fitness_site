@@ -78,7 +78,7 @@ def chatting(request):
             recipient=recipient,
             message=request.POST.get('body')
         )
-        return redirect('chatting') 
+        return redirect('chatting')  
 
     if 'recipient' in request.GET:
         recipient_username = request.GET.get('recipient')
@@ -134,20 +134,13 @@ def account(request):
                 playlist=request.POST.get('playlist')
                 contact=request.POST.get('contact')
 
-                prof=profile.objects.create(
-                    user=request.user,
-                    description=description,
-                    age=age,
-                    playlist=playlist,
-                    contact=contact,
-                )
-                prof.save()
-                return redirect('/user/home')
+        prof=profile.objects.create(
+           user=request.user,
+           description=description,
+           age=age,
+           playlist=playlist,
+           contact=contact,
+        )
+        prof.save()
 
-        return render(request,'profile.html')
-   
-def workout(request):
-    return render(request,'workout.html')
-
-def music(request):
-    return render(request,'music.html')
+   return render(request,'profile.html')
