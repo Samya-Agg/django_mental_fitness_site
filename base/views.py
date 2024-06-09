@@ -134,13 +134,19 @@ def account(request):
                 playlist=request.POST.get('playlist')
                 contact=request.POST.get('contact')
 
-        prof=profile.objects.create(
-           user=request.user,
-           description=description,
-           age=age,
-           playlist=playlist,
-           contact=contact,
-        )
-        prof.save()
+                prof=profile.objects.create(
+                    user=request.user,
+                    description=description,
+                    age=age,
+                    playlist=playlist,
+                    contact=contact,
+                )
+                prof.save()
 
    return render(request,'profile.html')
+
+def workout(request):
+    return render(request,'workout.html')
+
+def music(request):
+    return render(request,'music.html')
