@@ -29,7 +29,7 @@ def loginPage(request):
           return redirect('/user/login/')
         else:
           login(request,user)
-          return redirect('/user/chat/')
+          return redirect('/user/profile/')
     
     return render(request,'login.html')
    
@@ -78,7 +78,7 @@ def chatting(request):
             recipient=recipient,
             message=request.POST.get('body')
         )
-        return redirect('chatting')  # Replace with the appropriate URL name
+        return redirect('chatting') 
 
     if 'recipient' in request.GET:
         recipient_username = request.GET.get('recipient')
@@ -116,21 +116,38 @@ def chatting(request):
    #context={"messages":chats}
    #return render(request,"chat.html",context)
 
+def sleep(request):
+    return render(request,'sleep.html')
+
+def diet(request):
+    return render(request,'diet.html')
+
 
 def account(request):
-   if request.method=="POST":
-        description=request.POST.get('description')
-        age=request.POST.get('age')
-        playlist=request.POST.get('playlist')
-        contact=request.POST.get('contact')
+   try:
+        prof=profile.objects.get(user=request.user)
+        return redirect('/user/home')
+   except profile.DoesNotExist:
+        if request.method=="POST":
+                description=request.POST.get('description')
+                age=request.POST.get('age')
+                playlist=request.POST.get('playlist')
+                contact=request.POST.get('contact')
 
-        prof=profile.objects.create(
-           user=request.user,
-           description=description,
-           age=age,
-           playlist=playlist,
-           contact=contact,
-        )
-        prof.save()
+                prof=profile.objects.create(
+                    user=request.user,
+                    description=description,
+                    age=age,
+                    playlist=playlist,
+                    contact=contact,
+                )
+                prof.save()
+                return redirect('/user/home')
 
-   return render(request,'profile.html')
+        return render(request,'profile.html')
+   
+def workout(request):
+    return render(request,'workout.html')
+
+def music(request):
+    return render(request,'music.html')

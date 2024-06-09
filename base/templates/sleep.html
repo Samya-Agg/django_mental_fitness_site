@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Sleep Cycle</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .result {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Track Your Sleep Cycle</h1>
+        <p>Enter the number of hours you slept:</p>
+        <input type="number" id="sleepHours" class="form-control" placeholder="e.g., 7.5">
+        <button onclick="trackSleep()" class="btn btn-primary mt-3">Track Sleep</button>
+        <div class="result mt-4">
+            <h3 id="resultText"></h3>
+            <p id="adviceText"></p>
+        </div>
+    </div>
+
+    <script>
+        function trackSleep() {
+            const sleepHours = document.getElementById('sleepHours').value;
+            const resultText = document.getElementById('resultText');
+            const adviceText = document.getElementById('adviceText');
+
+            if (sleepHours) {
+                resultText.textContent = `You slept for ${sleepHours} hours.`;
+
+                if (sleepHours > 8) {
+                    adviceText.textContent = "You've slept more than 8 hours. Consider engaging in some physical activities or pursuing a hobby!";
+                } else if (sleepHours < 6) {
+                    adviceText.textContent = "You've slept less than 6 hours. Try to get more rest tonight!";
+                } else {
+                    adviceText.textContent = "Your sleep duration is within a healthy range. Keep it up!";
+                }
+
+                let sleepData = localStorage.getItem('sleepData');
+                sleepData = sleepData ? JSON.parse(sleepData) : [];
+                sleepData.push(sleepHours);
+                localStorage.setItem('sleepData', JSON.stringify(sleepData));
+            } else {
+                resultText.textContent = "Please enter a valid number of hours.";
+                adviceText.textContent = "";
+            }
+        }
+
+        window.onload = function() {
+            let sleepData = localStorage.getItem('sleepData');
+            sleepData = sleepData ? JSON.parse(sleepData) : [];
+            if (sleepData.length > 0) {
+                const lastSleepHours = sleepData[sleepData.length - 1];
+                document.getElementById('resultText').textContent = `Last recorded sleep duration: ${lastSleepHours} hours.`;
+            }
+        }
+    </script>
+</body>
+</html>

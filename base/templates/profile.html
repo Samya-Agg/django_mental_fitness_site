@@ -4,32 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+          background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .card {
+          padding: 2rem;
+          border-radius: 1rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 500px;
+      }
+      .form-control {
+          margin-bottom: 1rem;
+      }
+      .form-label {
+          margin-bottom: 0.5rem;
+      }
+  </style>
 </head>
 <body>
-    <h1>Profile</h1>
+  <div class="card">
+    <h1 class="text-center">Profile</h1>
     <form method="post" action="">
-    {% csrf_token %}
-      <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Describe yourself</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" name="description" aria-describedby="emailHelp">
-        </div>
-  
+        {% csrf_token %}
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Age</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" name="age" aria-describedby="emailHelp">
+            <label for="description" class="form-label">Describe yourself</label>
+            <input type="text" class="form-control" id="description" name="description" aria-describedby="descriptionHelp">
         </div>
-  
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Playlist</label>
-        <input type="text" class="form-control" name="playlist" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Contact</label>
-        <input type="text" class="form-control" name="contact" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="text" class="form-control" id="age" name="age" aria-describedby="ageHelp">
+        </div>
+        <div class="mb-3">
+            <label for="playlist" class="form-label">Playlist</label>
+            <input type="text" class="form-control" id="playlist" name="playlist" aria-describedby="playlistHelp">
+        </div>
+        <div class="mb-3">
+            <label for="contact" class="form-label">Contact</label>
+            <input type="text" class="form-control" id="contact" name="contact" aria-describedby="contactHelp">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+</div>
+
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       
 </body>
 </html>

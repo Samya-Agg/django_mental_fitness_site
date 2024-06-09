@@ -1,36 +1,151 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student's Sukoon</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&display=swap');
+        body {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+        .header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+        }
+        .header a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        .card-deck {
+            width: 100%;
+        }
+        .card {
+            margin: 1rem 0;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: calc(0.25rem - 1px);
+            border-top-right-radius: calc(0.25rem - 1px);
+        }
+
+        .quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .footer p {
+            margin: 0.5rem 0;
+        }
+        .contact-btn {
+            margin-top: 1rem;
+            font-family: 'Lobster', cursive;
+            font-size: 1.2rem;
+        }
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Home</h1>
-    <h3>Therapist</h3>
-    <a href="/user/chat/">Chat with a Therapist Now!!</a>
-    <a href="/user/profile/">Create Your Profile!!</a>
-    <a href="/">Music</a>
-    <a href="/">Manage your diet</a>
-    <a href="/">Manage your sleep</a>
-    <ul>
-        <li>
-            <h4>Thalia Eley</h4>
-            Username: thalia245
-            A graduate of Cambridge University and University College London’s Institute of Child Health, Thalia Eley is a professor of developmental psychology at King’s College in London. Her publications include over 140 academic articles, with extensive research on genetic and environmental factors and their relation to the treatment of anxiety and depression. She has conducted studies surrounding cognitive behavior therapy for child anxiety and exposure therapy in treating adult phobias. In 2011, Eley was awarded the Macquarie University Research Excellence Award for her study on childhood anxiety.
-        </li>
-        <li>
-            <h4>Dr. Shraboni Nandi</h4>
-            Username: shraboni245
-            Dr. Shraboni Nandi's innovative therapeutic techniques have redefined the treatment landscape. From mindfulness-based interventions to novel counseling approaches, his work exemplifies a commitment to evolving methodologies for enhanced mental well-being.
-        </li>
-        <li>
-            <h4>Ms Gurpal Kaur</h4>
-            Username: gurpal245
-            Ms Gurpal Kaur is celebrated for her holistic approach to mental health, seamlessly integrating alternative healing practices. Her emphasis on the mind-body connection has opened new avenues for individuals seeking a comprehensive and integrated approach to well-being.
-        </li>
+    <div class="text-center mb-4">
+        <h1>Student's Sukoon</h1>
+        <h2>Need to vent? We're here for you!</h2>
+        <img src="{%static 'base/logo.png'%} " alt="Logo" width="150" height="250" class="img-fluid">
+    </div>
+    <hr>
+    <div class="top-right">
+    {% if request.user.is_authenticated %}
+     <a href="/user/logout/" class="btn btn-danger btn-sm">Logout</a>
+    {% endif %}
+</div>
+    <div class="header">
+        <a href="/user/chat/">Chat Now</a>
+        
+        <a href="/user/music/">Add Your Music Preferences</a>
+        <a href="/user/diet/">Manage Your Diet</a>
+        <a href="/user/sleep/">Track Your Sleep Cycle</a>
+        <a href="/user/workout/">Get Yoga/Workout Plan</a>
+        <a href="/">Get Professional Help</a>
+    </div>
+    <hr> 
+    
+    <h3 class="text-center">Find Instant Support</h3>
+    <div class="card-deck">
+        <div class="card">
+            <img src="{%static 'base/doct1.jpg'%} " alt="Thalia Eley" width="150" height="150">
+            <div class="card-body">
+                <h4 class="card-title">Thalia Eley</h4>
+                <p class="card-text">Username: thalia245</p>
+                <p class="card-text">A graduate of Cambridge University and University College London’s Institute of Child Health, Thalia Eley is a professor of developmental psychology at King’s College in London. Her publications include over 140 academic articles, with extensive research on genetic and environmental factors and their relation to the treatment of anxiety and depression.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{%static 'base/doct2.jpg'%} " alt="Dr. Shraboni Nandi" width="150" height="150">
+            <div class="card-body">
+                <h4 class="card-title">Dr. Shraboni Nandi</h4>
+                <p class="card-text">Username: shraboni245</p>
+                <p class="card-text">Dr. Shraboni Nandi's innovative therapeutic techniques have redefined the treatment landscape. From mindfulness-based interventions to novel counseling approaches, his work exemplifies a commitment to evolving methodologies for enhanced mental well-being.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{%static 'base/doct3.jpg'%} " alt="Ms Gurpal Kaur" width="150" height="150">
+            <div class="card-body">
+                <h4 class="card-title">Ms Gurpal Kaur</h4>
+                <p class="card-text">Username: gurpal245</p>
+                <p class="card-text">Ms Gurpal Kaur is celebrated for her holistic approach to mental health, seamlessly integrating alternative healing practices. Her emphasis on the mind-body connection has opened new avenues for individuals seeking a comprehensive and integrated approach to well-being.</p>
+            </div>
+        </div>
+    </div>
 
-        </li>
-    </ul>
+    <div class="quote">
+        "Empowering minds, transforming lives- because every student deserves to thrive!"
+    </div>
+
+    <div class="footer">
+        <button class="btn btn-primary contact-btn">Contact Us</button>
+        <p>&copy; 2024 Student's Sukoon. All rights reserved.</p>
+
+    </div>
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

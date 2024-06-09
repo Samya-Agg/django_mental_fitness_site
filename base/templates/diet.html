@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Your Diet</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .meal-card {
+            margin-bottom: 1rem;
+        }
+        .total-calories {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Your Diet</h1>
+        <p>Select your meals and track your calorie intake:</p>
+        <div id="meals" class="row">
+        </div>
+        <div class="total-calories">
+            Total Calories: <span id="totalCalories">0</span>
+        </div>
+    </div>
+
+    <div class="modal fade" id="calorieModal" tabindex="-1" aria-labelledby="calorieModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="calorieModalLabel">Calorie Alert</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="calorieModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const meals = [
+    { name: "Vegetable Biryani", calories: 400 },
+    { name: "Masala Dosa", calories: 350 },
+    { name: "Palak Paneer", calories: 450 },
+    { name: "Butter Chicken", calories: 500 },
+    { name: "Chole Bhature", calories: 600 },
+    { name: "Samosa Chaat", calories: 300 },
+    { name: "Dal Tadka", calories: 350 },
+    { name: "Aloo Paratha", calories: 450 },
+    { name: "Paneer Tikka", calories: 350 },
+    { name: "Poha", calories: 300 },
+    { name: "Matar Paneer", calories: 400 },
+    { name: "Rajma Chawal", calories: 450 },
+    { name: "Vada Pav", calories: 350 },
+    { name: "Idli Sambar", calories: 300 },
+    { name: "Mutton Curry", calories: 550 }
+];
+
+
+        let totalCalories = 0;
+        const totalCaloriesElement = document.getElementById("totalCalories");
+        const mealsContainer = document.getElementById("meals");
+
+        meals.forEach((meal, index) => {
+            const mealCard = document.createElement("div");
+            mealCard.className = "col-md-4 meal-card";
+            mealCard.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${meal.name}</h5>
+                        <p class="card-text">${meal.calories} calories</p>
+                        <button class="btn btn-primary" onclick="addCalories(${index})">Add</button>
+                        <button class="btn btn-danger" onclick="removeCalories(${index})">Remove</button>
+                    </div>
+                </div>
+            `;
+            mealsContainer.appendChild(mealCard);
+        });
+
+        function addCalories(index) {
+            totalCalories += meals[index].calories;
+            updateCalories();
+        }
+
+        function removeCalories(index) {
+            totalCalories -= meals[index].calories;
+            updateCalories();
+        }
+
+        function updateCalories() {
+            totalCaloriesElement.textContent = totalCalories;
+
+            if (totalCalories > 2000) {
+                showModal("You have exceeded your daily calorie limit of 2000 calories. Please be mindful of your intake.");
+            } else if (totalCalories < 1800 && totalCalories > 0) {
+                showModal("Your calorie intake is below the recommended 1800 calories. Consider adding more to your diet.");
+            }
+        }
+
+        function showModal(message) {
+            const modalBody = document.getElementById("calorieModalBody");
+            modalBody.textContent = message;
+            $('#calorieModal').modal('show');
+        }
+    </script>
+</body>
+</html>

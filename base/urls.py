@@ -9,5 +9,8 @@ urlpatterns = [
     path('logout/',views.logoutpage,name="logout"),
     path('profile/',views.account,name="profile"),
     path('home/',views.index,name="home"),
-
+    path('sleep/',views.sleep,name="sleep"),
+    path('diet/',views.diet,name="diet"),
+    path('workout/',views.workout,name="workout"),
+    path('music/',views.music,name="music"),
 ]
